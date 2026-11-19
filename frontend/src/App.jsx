@@ -13,6 +13,7 @@ function App() {
 
   const chatRef = useRef(null);
   const fileInputRef = useRef(null);
+  const [conversationId, setConversationId] = useState(null);
 
   useEffect(() => {
     chatRef.current?.scrollTo(0, chatRef.current.scrollHeight);
@@ -34,8 +35,14 @@ function App() {
 
     try {
       const res = await axios.get(`${API}/ask`, {
-        params:{ question: trimmedQuestion }
-      });
+    params: {
+        question: trimmedQuestion,
+        conversation_id: conversationId
+    }
+});
+
+// Save conversation ID returned by backend
+setConversationId(res.data.conversation_id);
 
       setMessages([
         ...newMessages,
@@ -117,7 +124,9 @@ function App() {
 
   const clearChat = () => {
     setMessages([]);
-  };
+    setConversationId(null);
+    setQuestion("");
+};
 
   return (
     <Wrapper $dark={darkMode}>
