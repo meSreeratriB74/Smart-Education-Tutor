@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import styled, { keyframes } from "styled-components";
 
-const API = "http://127.0.0.1:8000";
+const API = "https://smart-education-tutor-api.onrender.com";
 
 function App() {
   const [messages, setMessages] = useState([]);
