@@ -1,7 +1,5 @@
-from sentence_transformers import SentenceTransformer
-
-model = SentenceTransformer("all-MiniLM-L6-v2")
-
+from fastembed import TextEmbedding
+model = TextEmbedding("sentence-transformers/all-MiniLM-L6-v2")
 def generate_embedding(text):
-    embedding = model.encode(text).tolist()
+    embedding = list(model.embed([text]))[0].tolist()
     return embedding
